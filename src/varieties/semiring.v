@@ -86,15 +86,14 @@ End ops_from_alg_to_sr.
 Lemma mor_from_sr_to_alg `{InVariety theory A} `{InVariety theory B}
   (f: ∀ u, A u → B u) `{!SemiRing_Morphism (f tt)}: HomoMorphism sig A B f.
 Proof.
- constructor.
-    intros []. apply _.
-   intros []; simpl.
-      apply rings.preserves_plus.
-     apply rings.preserves_mult.
-   change (f tt 0 = 0). apply rings.preserves_0.
-   change (f tt 1 = 1). apply rings.preserves_1.
-   apply _. apply _.
-Qed. (* todo: these [change]s should not be necessary at all. [apply] is too weak. report bug. *)
+ constructor; try apply _.
+  intros []; apply _.
+ intros []; simpl.
+    apply rings.preserves_plus.
+   apply rings.preserves_mult.
+  apply rings.preserves_0.
+ apply rings.preserves_1.
+Qed.
 
 Instance decode_variety_and_ops `{v: InVariety theory A}: SemiRing (A tt).
 Proof with simpl; auto.

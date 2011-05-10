@@ -6,8 +6,6 @@ Require Import
   interfaces.orders interfaces.additional_operations
   field_of_fractions.
 
-Typeclasses Transparent Le Lt.
-
 (* canonical names for relations/operations/constants: *)
 Instance Q_eq: Equiv Q := Qeq.
 Instance Q_0 : RingZero Q := 0%Q.

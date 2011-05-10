@@ -129,5 +129,5 @@ Proof.
    now apply le_plus_minus.
   intros x y E. destruct (orders.le_equiv_lt x y E) as [E2|E2].
    rewrite E2. now apply minus_diag.
- apply not_le_minus_0. change (¬y ≤ x). now apply orders.lt_not_le_flip.
+  apply not_le_minus_0. now apply orders.lt_not_le_flip.
 Qed.

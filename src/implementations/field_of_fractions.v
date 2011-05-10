@@ -165,7 +165,6 @@ Proof.
   unfold equiv, Frac_equiv, Frac_lift in *. simpl.
   now rewrite <-2!preserves_mult, E.
 Qed.
-Typeclasses Transparent SemiGroupOp RingPlus RingMult.
 
 Global Instance: SemiRing_Morphism Frac_lift.
 Proof.

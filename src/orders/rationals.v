@@ -195,7 +195,6 @@ Section default_order.
     intros x y.
     destruct (rationals_decompose_pos_den (SRpair nat) x) as [xn [xd [E1x E2x]]].
     destruct (rationals_decompose_pos_den (SRpair nat) y) as [yn [yd [E1y E2y]]].
-    Typeclasses Transparent Le Lt.
     rewrite E2x, E2y.
     destruct (total (≤) (xn * yd) (yn * xd)); [left | right]; now apply P.
   Qed.

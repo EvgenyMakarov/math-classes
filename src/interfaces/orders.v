@@ -17,7 +17,7 @@ On the other hand, if equality is decidable, we will prove that we have the
 usual properties like Trichotomy (<) and TotalRelation (≤).
 *)
 
-Class PartialOrder `{e: Equiv A} (o : Le A) : Prop :=
+Class PartialOrder `{e: Equiv A} (Ale : Le A) : Prop :=
   { po_setoid : Setoid A (* Making this a coercion makes instance search slow *)
   ; po_proper:> Proper ((=) ==> (=) ==> iff) (≤)
   ; po_preorder:> PreOrder (≤)
@@ -25,14 +25,14 @@ Class PartialOrder `{e: Equiv A} (o : Le A) : Prop :=
 
 (* The strict order from the standard library does not include (=) and thus
   does not require (<) to be Proper. *)
-Class StrictSetoidOrder `{e : Equiv A} (o : Lt A) : Prop :=
+Class StrictSetoidOrder `{e : Equiv A} (Alt : Lt A) : Prop :=
   { strict_setoid_order_setoid : Setoid A
   ; strict_setoid_order_proper :> Proper ((=) ==> (=) ==> iff) (<)
   ; strict_setoid_order_strict :> StrictOrder (<) }.
 
 (* The constructive notion of a total strict total order. Note that we get Proper (<) 
   from cotransitivity. We will prove that (<) is in fact a StrictSetoidOrder. *)
-Class PseudoOrder `{e : Equiv A} `{ap : Apart A} (so : Lt A) : Prop :=
+Class PseudoOrder `{e : Equiv A} `{ap : Apart A} (Alt : Lt A) : Prop :=
   { pseudo_order_setoid : StrongSetoid A
   ; pseudo_order_antisym : ∀ x y, ¬(x < y ∧ y < x)
   ; pseudo_order_cotrans :> CoTransitive (<) 
@@ -40,7 +40,7 @@ Class PseudoOrder `{e : Equiv A} `{ap : Apart A} (so : Lt A) : Prop :=
 
 (* A partial order (≤) with a corresponding (<). We will prove that (<) is in fact
   a StrictSetoidOrder *)
-Class StrictPartialOrder `{e : Equiv A} `{ap : Apart A} (o : Le A) (so : Lt A) : Prop :=
+Class StrictPartialOrder `{e : Equiv A} `{ap : Apart A} (Ale : Le A) (Alt : Lt A) : Prop :=
   { strict_po_setoid : StrongSetoid A 
   ; strict_po_po :> PartialOrder (≤)
   ; strict_po_trans :> Transitive (<)
@@ -49,7 +49,7 @@ Class StrictPartialOrder `{e : Equiv A} `{ap : Apart A} (o : Le A) (so : Lt A) :
 (* A pseudo order (<) with a corresponding (≤). We will prove that (≤) is in fact
   a PartialOrder. *)
 Class FullPseudoOrder `{e : Equiv A} `{ap : Apart A} (Ale : Le A) (Alt : Lt A) : Prop :=
-  { full_pseudo_order_pseudo :> PseudoOrder Alt 
+  { full_pseudo_order_pseudo :> PseudoOrder (<) 
   ; le_iff_not_lt_flip : ∀ x y, x ≤ y ↔ ¬y < x }.
 
 Section order_maps.

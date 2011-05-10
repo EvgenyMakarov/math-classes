@@ -5,14 +5,12 @@ Require Import
  RelationClasses Relation_Definitions Morphisms Setoid Program.
 Require Export Unicode.Utf8 Utf8_core.
 
-(* Revert to transparency to allow conversions during unification. *)
-
-Typeclasses Transparent compose flip.
-
 (* Equality *)
 Class Equiv A := equiv: relation A.
 
+(* Revert to transparency to allow conversions during unification. *)
 Typeclasses Transparent Equiv. 
+Typeclasses Transparent compose flip.
 
 (* We use this virtually everywhere, and so use "=" for it: *)
 Infix "=" := equiv: type_scope.

@@ -157,8 +157,7 @@ Instance: SemiRing_Morphism DtoStdQ.
 Proof.
   repeat (split; try apply _).
      exact DtoQ_slow_preserves_plus.
-     Typeclasses Transparent MonoidUnit RingZero RingOne.
-     exact DtoQ_slow_preserves_0.
+    exact DtoQ_slow_preserves_0.
    exact DtoQ_slow_preserves_mult.
   exact DtoQ_slow_preserves_1.
 Qed.
@@ -237,7 +236,6 @@ Proof.
   split; unfold pow, dy_pow.
     intros [xm xe] [ym ye] E1 e1 e2 E2. 
     unfold equiv, dy_equiv, DtoQ_slow in E1 |- *. simpl in *.
-    setoid_replace (xm ^ e1) with (xm ^ e2) by now apply (_ : Proper ((=) ==> (=) ==> (=)) pw). (* fixme *)
     rewrite E2. clear e1 E2.
     rewrite 2!(preserves_nat_pow (f:=ZtoStdQ)).
     rewrite 2!(commutativity ('e2 : Z)).
