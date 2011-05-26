@@ -39,7 +39,7 @@ Section setoid_morphisms.
   Class Setoid_Morphism :=
     { setoidmor_a: Setoid A
     ; setoidmor_b: Setoid B
-    ; sm_proper:> Proper ((=) ==> (=)) f }. 
+    ; sm_proper:> Proper ((=) ==> (=)) f }.
 
   Class StrongSetoid_Morphism :=
     { strong_setoidmor_a: StrongSetoid A
@@ -111,7 +111,7 @@ Section upper_classes.
     require commutative multiplication. *)
 
   Class IntegralDomain: Prop :=
-    { intdom_ring: Ring 
+    { intdom_ring:> Ring 
     ; intdom_nontrivial: PropHolds (1 ≠ 0)
     ; intdom_nozeroes:> NoZeroDivisors A }.
 
@@ -140,13 +140,13 @@ Hint Extern 4 (PropHolds (1 ≠ 0)) => eapply @intdom_nontrivial : typeclass_ins
 Hint Extern 5 (PropHolds (1 ⪥ 0)) => eapply @field_nontrivial : typeclass_instances.
 Hint Extern 5 (PropHolds (1 ≠ 0)) => eapply @decfield_nontrivial : typeclass_instances.
 
-(* 
-For a strange reason Ring instances of Integers are sometimes obtained by
-Integers -> IntegralDomain -> Ring and sometimes directly. Making this an
-instance with a low priority instead of using intdom_ring:> Ring forces Coq to
-take the right way 
-*)
-Hint Extern 10 (Ring _) => apply @intdom_ring : typeclass_instances.
+(* (*  *)
+(* For a strange reason Ring instances of Integers are sometimes obtained by *)
+(* Integers -> IntegralDomain -> Ring and sometimes directly. Making this an *)
+(* instance with a low priority instead of using intdom_ring:> Ring forces Coq to *)
+(* take the right way  *)
+(* *) *)
+(* Hint Extern 10 (Ring _) => apply @intdom_ring : typeclass_instances. *)
 
 Implicit Arguments tight_apart [[A] [e] [ap] [StrongSetoid]].
 Implicit Arguments mult_inverse [[A] [e] [plus] [mult] [zero] [one] [inv] [ap] [mult_inv0] [Field]].

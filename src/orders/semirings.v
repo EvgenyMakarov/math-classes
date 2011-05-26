@@ -192,7 +192,7 @@ Section strict_semiring_order.
     apply (strictly_order_preserving_back (x+)).
     now rewrite <-Ez, rings.plus_0_r.
   Qed.
-
+  
   Global Instance: ∀ (z : R), PropHolds (0 < z) → StrictlyOrderPreserving (z *.).
   Proof.
     intros z E. repeat (split; try apply _). intros x y F.
@@ -234,7 +234,8 @@ Section strict_semiring_order.
     apply compose_lt with (a * b).
      now apply pos_mult_compat.
     transitivity (z * x + (z + a) * b).
-     rewrite <-Ea2. ring.
+     rewrite <-Ea2. 
+     ring.
     ring.
   Qed.
 

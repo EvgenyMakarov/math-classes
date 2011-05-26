@@ -115,8 +115,8 @@ Section specialized.
     `{!SemiGroupOp C} `{!Equiv C}
     (f: A → B) (g: B → C).
 
-  Global Instance id_morphism `{!SemiGroup A}: SemiGroup_Morphism id.
-  Proof. repeat (constructor; try apply _); reflexivity. Qed.
+  Global Instance id_morphism `{!SemiGroup C}: SemiGroup_Morphism id.
+  Proof. repeat (constructor; try apply _). reflexivity. Qed.
 
   Global Instance compose_morphisms `{!SemiGroup A, !SemiGroup B, !SemiGroup C}
     `{!SemiGroup_Morphism f} `{!SemiGroup_Morphism g}: SemiGroup_Morphism (g ∘ f).

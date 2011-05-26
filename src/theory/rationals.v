@@ -67,7 +67,7 @@ Section another_integers.
   (* Making this instance global results in loops *)
   Instance: Bijective f := {}.
 
-  Global Instance: Bijective (f⁻¹) := {}.
+  Global Instance: Bijective (f⁻¹) := _.
   
   Global Instance: SemiRing_Morphism (f⁻¹) := {}.
 End another_integers.
@@ -143,7 +143,7 @@ Section isomorphic_image_is_rationals.
 
   Instance iso_to_frac: RationalsToFrac F := λ Z _ _ _ _ _ _ _ _, rationals_to_frac Q Z ∘ f⁻¹.
   
-  Instance: Bijective (f⁻¹) := {}.
+  Instance: Bijective (f⁻¹) := _.
   Instance: SemiRing_Morphism (f⁻¹) := {}.
 
   Lemma iso_is_rationals: Rationals F. 

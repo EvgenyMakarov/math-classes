@@ -44,7 +44,7 @@ Section ideal_congruence.
 
   (* Next, we make a congruence: *)
 
-  Program Instance congruence: Equiv R := λ x y, P (x + - y).
+  Program Instance congruence: Equiv R | 1 := λ x y, P (x + - y).
 
   Instance: Equivalence congruence.
   Proof with intuition.
@@ -52,7 +52,7 @@ Section ideal_congruence.
    constructor; repeat intro.
      rewrite plus_opp_r...
     rewrite opp_swap_r...
-   assert (x + - z = (x + -y) + (y + - z)) as E by ring. rewrite E...
+    assert (x + - z = (x + -y) + (y + - z)) as E by ring; rewrite E...
   Qed.
 
   Instance cong_proper: Proper ((=) ==> (=) ==> iff) congruence.
@@ -111,7 +111,7 @@ Section kernel_is_ideal.
   Proof with ring.
    unfold kernel, compose, flip.
    repeat split.
-      exists 0. apply preserves_0.
+      refine (ex_intro _ 0 _). apply preserves_0.
      intros ?? E E'. rewrite preserves_plus, preserves_opp, E, E'...
     intros ?? E. rewrite preserves_mult, E...
    intros ?? E. rewrite preserves_mult, E...

@@ -65,7 +65,7 @@ Proof.
   split; try apply _. intros x y E. 
   unfold equiv, NType_equiv, eq. unfold to_N in E.
   rewrite <-(Zabs_eq (to_Z x)), <-(Zabs_eq (to_Z y)) by now apply spec_pos.
-  now rewrite <-!Z_of_N_abs, E.
+  rewrite <- !Z_of_N_abs. do 2 red in E. now rewrite E.
 Qed.
 
 Instance: Bijective to_N := {}.

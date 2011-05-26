@@ -47,7 +47,7 @@ Section from_pseudo_ring_order.
     repeat (split; try apply _).
      intros x y E. exists (- x + y). 
      now rewrite associativity, plus_opp_r, plus_0_l.
-    intros x y E. unfold lt at 1. 
+    intros x y E.
     rewrite <-(plus_0_l x), <-(plus_0_l y), <-!(plus_opp_l z), <-!associativity.
     now apply (strictly_order_preserving _).
   Qed.

@@ -82,16 +82,14 @@ Section subalgebras.
 
   Instance: Injective (proj i).
   Proof.
-   constructor. firstorder.
-   constructor; try apply _.
-   firstorder.
+   constructor. firstorder. apply _.
   Qed.
 
   Global Instance: Mono (algebras.arrow _ proj).
   Proof.
-   apply forget_algebra.mono.
-   apply categories.product.mono.
-   intro. apply setoids.mono.
+   apply forget_algebra.mono. 
+   apply categories.product.mono. 
+   intro. apply setoids.mono. 
    simpl. apply _.
   Qed. (* this really should be completely automatic. *)
 End subalgebras.

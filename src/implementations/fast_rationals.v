@@ -110,7 +110,7 @@ Instance bigQ_shiftl: ShiftL bigQ bigZ := λ x k,
     | BigQ.Qq n d => BigQ.Qq n (d ≪ k)
     end
   end.
-
+            
 Instance: ShiftLSpec bigQ bigZ _.
 Proof.
   apply shiftl_spec_from_int_pow.
@@ -141,7 +141,7 @@ Instance bigQ_Zshiftl: ShiftL bigQ Z := λ x k, x ≪ 'k.
 
 Instance: ShiftLSpec bigQ Z _.
 Proof.
-  split; unfold shiftl, bigQ_Zshiftl. 
+  split; unfold shiftl, bigQ_Zshiftl.
     solve_proper.
    intro. now apply shiftl_0.
   intros x n.

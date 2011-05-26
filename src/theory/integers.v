@@ -68,7 +68,7 @@ Proof.
 Qed.
 
 Section retract_is_int.
-  Context `{Integers Int} `{Ring Int2}.
+  Context `{Integers Int} `{ring_Int2 : Ring Int2}.
   Context (f : Int → Int2) `{!Inverse f} `{!Surjective f} `{!SemiRing_Morphism f} `{!SemiRing_Morphism (f⁻¹)}.
 
   (* If we make this an instance, then instance resolution will often loop *)
@@ -90,9 +90,12 @@ Section retract_is_int.
   End for_another_ring.
   
   (* If we make this an instance, then instance resolution will often loop *)
-  Program Definition retract_is_int: Integers Int2 (U:=retract_is_int_to_ring). 
-  Proof.
-    esplit; try apply _. (* for some reason split doesn't work... *)
+  Program Definition retract_is_int: Integers Int2 (U:=retract_is_int_to_ring) := {| integers_ring := ring_Int2 |}.
+  Next Obligation. 
+    apply _.
+  Qed.
+
+  Next Obligation.
     apply integer_initial. intros. 
     unfold integers_to_ring, retract_is_int_to_ring. 
     now apply same_morphism.

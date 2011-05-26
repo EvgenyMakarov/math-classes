@@ -23,6 +23,7 @@ Section algebras.
    apply setoids.product_equiv.
    intro. apply _.
   Defined.
+  Existing Instance u.
 
   Instance rec_impl_proper: ∀ o,
     Proper (@setoids.product_equiv I _ (fun _ => op_type_equiv _ _ _) ==> (=)) (rec_impl o).
@@ -70,7 +71,7 @@ Section varieties.
     `(∀ i, InVariety et (carriers i)).
 
   Notation carrier := (carrier et I carriers).
-  Let carrier_e := product_e et I carriers _.
+  Instance carrier_e : forall s, Equiv _ := product_e et I carriers _.
 
   Fixpoint nqe {t}: op_type carrier t → (∀ i, op_type (carriers i) t) → Prop :=
    match t with
@@ -106,8 +107,6 @@ Section varieties.
       apply sig_type_refl.
        intro. apply _.
       apply eval_proper; try apply _.
-        apply product_algebra.
-        intro. apply _.
        reflexivity.
       reflexivity.
      apply (nqe_proper t (eval et vars term1 (eval et vars term2)) (eval et vars term1 (eval et vars term2)) H2 k p).

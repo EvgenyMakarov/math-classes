@@ -13,7 +13,7 @@ Context `{DecField A} `{∀ x y, Decision (x = y)} `{Integers B} `{!IntPowSpec A
 Add Field A : (dec_fields.stdlib_field_theory A).
 Add Ring B : (rings.stdlib_ring_theory B).
 
-Global Instance: Proper ((=) ==> (=) ==> (=)) (^) | 0.
+Global Instance: @Proper (A -> B -> A) ((=) ==> (=) ==> (=)) (^) | 0.
 Proof int_pow_proper.
 
 Global Instance int_pow_mor_1: ∀ x : A, Setoid_Morphism (x^) | 0.
@@ -127,7 +127,7 @@ Proof. now rewrite int_pow_S_nonneg, int_pow_2 by solve_propholds. Qed.
 Lemma int_pow_4 x : x ^ (4:B) = x * (x * (x * x)).
 Proof. now rewrite int_pow_S_nonneg, int_pow_3 by solve_propholds. Qed.
 
-Global Instance int_pow_base_1: LeftAbsorb (^) 1.
+Global Instance int_pow_base_1: LeftAbsorb (^) (1:A).
 Proof. 
   intro n. pattern n. apply integers.biinduction; clear n.
     solve_proper.
@@ -251,7 +251,7 @@ Proof.
   intros.
   rewrite <-associativity, int_pow_S.
    apply semirings.gt_1_mult_lt_compat_l; auto.
-   transitivity 1; [apply semirings.lt_0_1 | assumption].
+   transitivity (1:A); [apply semirings.lt_0_1 | assumption].
   apply orders.lt_ne_flip.
   apply orders.le_lt_trans with 1; trivial.
   now apply semirings.le_0_1.

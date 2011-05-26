@@ -53,7 +53,7 @@ Instance naturals_to_naturals_injective `{Naturals N} `{Naturals N2} (f: N → N
 Proof. now apply (to_semiring_injective (naturals_to_semiring N2 N) _). Qed.
 
 Section retract_is_nat.
-  Context `{Naturals N} `{SemiRing SR}.
+  Context `{Naturals N} `{sr_SR : SemiRing SR}.
   Context (f : N → SR) `{inv_f : !Inverse f} `{!Surjective f} `{!SemiRing_Morphism f} `{!SemiRing_Morphism (f⁻¹)}.
 
   (* If we make this an instance, then instance resolution will often loop *)
@@ -76,9 +76,12 @@ Section retract_is_nat.
   End for_another_semirings.
 
   (* If we make this an instance, then instance resolution will often loop *)
-  Program Definition retract_is_nat: Naturals SR (U:=retract_is_nat_to_sr). 
-  Proof. 
-    esplit; try apply _. (* for some reason split doesn't work... *)
+  Program Definition retract_is_nat: Naturals SR (U:=retract_is_nat_to_sr) := {| naturals_ring := sr_SR |}.
+  Next Obligation.
+    apply _.
+  Qed.
+
+  Next Obligation.
     intros. apply natural_initial. intros.
     now apply same_morphism.
   Qed.
@@ -123,7 +126,7 @@ Section borrowed_from_nat.
 
   Let three_vars (x y z : N) (_: unit) v := match v with 0%nat => x | 1%nat => y | _ => z end.
   Let two_vars (x y : N) (_: unit) v := match v with 0%nat => x | _ => y end.
-  Let no_vars (_: unit) (v: nat) := 0.
+  Let no_vars (_: unit) (v: nat) := 0:N.
 
   Local Notation x' := (Var varieties.semirings.sig _ 0 tt).
   Local Notation y' := (Var varieties.semirings.sig _ 1 tt).
@@ -161,13 +164,13 @@ Section borrowed_from_nat.
     PropHolds ((1:N) ⪥ 0).
   Proof. apply strong_setoids.ne_apart. solve_propholds. Qed.
 
-  Lemma zero_sum x y : x + y = 0 → x = 0 ∧ y = 0.
+  Lemma zero_sum (x y : N) : x + y = 0 → x = 0 ∧ y = 0.
   Proof.
     rapply (from_nat_stmt (x' + y' === 0 -=> Conj _ (x' === 0) (y' === 0)) (two_vars x y)).
     intro. simpl. apply Plus.plus_is_O.
   Qed.
   
-  Lemma one_sum x y : x + y = 1 → (x = 1 ∧ y = 0) ∨ (x = 0 ∧ y = 1).
+  Lemma one_sum (x y : N) : x + y = 1 → (x = 1 ∧ y = 0) ∨ (x = 0 ∧ y = 1).
   Proof. 
    rapply (from_nat_stmt (x' + y' === 1 -=> Disj _ (Conj _ (x' === 1) (y' === 0)) (Conj _ (x' === 0) (y' === 1))) (two_vars x y)).
    intros. simpl. intros. edestruct Plus.plus_is_one; eauto.
@@ -181,7 +184,7 @@ Section borrowed_from_nat.
   Qed.
 End borrowed_from_nat.
 
-Lemma nz_one_plus_zero x : 1 + x ≠ 0.
+Lemma nz_one_plus_zero (x : N) : 1 + x ≠ 0.
 Proof.
   intro E.
   destruct (zero_sum 1 x E).

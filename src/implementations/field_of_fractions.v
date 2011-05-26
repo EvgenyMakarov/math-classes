@@ -1,4 +1,4 @@
-Require theory.fields.
+Require theory.dec_fields.
 Require Import Morphisms Ring abstract_algebra theory.rings.
 
 Inductive Frac R `{ap : Equiv R} `{zero : RingZero R} : Type := frac { num: R; den: R; den_ne_0: den ≠ 0 }.
@@ -14,7 +14,7 @@ Context `{IntegralDomain R} `{∀ x y, Decision (x = y)}.
 
 Add Ring R: (stdlib_ring_theory R). 
 
-Global Instance Frac_equiv: Equiv (Frac R) := λ x y, num x * den y = num y * den x.
+Global Instance Frac_equiv: Equiv (Frac R) | 0 := λ x y, num x * den y = num y * den x.
 
 Instance: Setoid (Frac R).
 Proof with auto.
@@ -82,7 +82,7 @@ Proof with try ring.
   rewrite E, E'...
 Qed.
 
-Instance: Ring (Frac R).
+Global Instance: Ring (Frac R).
 Proof. repeat (split; try apply _); ring_on_ring. Qed.
 
 Global Instance Frac_dec_mult_inv: DecMultInv (Frac R) := λ x,
@@ -159,7 +159,7 @@ Next Obligation.
   now apply (den_ne_0 x).
 Qed.
 
-Instance: Proper ((=) ==>(=)) Frac_lift.
+Instance: Proper ((=) ==> (=)) Frac_lift.
 Proof.
   intros x y E.
   unfold equiv, Frac_equiv, Frac_lift in *. simpl.

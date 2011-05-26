@@ -5,6 +5,8 @@ Require Import
   abstract_algebra interfaces.naturals theory.categories
   interfaces.additional_operations interfaces.orders orders.semirings.
 
+Close Scope nat_scope.
+
 Instance nat_equiv: Equiv nat := eq.
 Instance nat_plus: RingPlus nat := plus.
 Instance nat_0: RingZero nat := 0%nat.

@@ -16,11 +16,11 @@ Context `{∀ z, LeftCancellation (+) z}.
 Add Ring SR : (rings.stdlib_semiring_theory SR).
 
 (* Equivalence *)
-Global Instance SRpair_equiv : Equiv (SRpair SR) := λ x y, pos x + neg y = pos y + neg x.
+Global Instance SRpair_equiv : Equiv (SRpair SR) | 4 := λ x y, pos x + neg y = pos y + neg x.
 Global Instance SRpair_apart `{Apart SR} : Apart (SRpair SR) := λ x y, pos x + neg y ⪥ pos y + neg x.
 
 Global Instance SRpair_trivial_apart `{!TrivialApart SR} :  TrivialApart (SRpair SR).
-Proof. intros x y. now rapply trivial_apart. Qed. 
+Proof. intros x y. now rapply trivial_apart. Qed.
 
 Instance: Setoid (SRpair SR).
 Proof.

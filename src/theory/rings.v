@@ -335,7 +335,7 @@ Section morphism_composition.
     `{!RingMult C} `{!RingPlus C} `{!RingOne C} `{!RingZero C} `{!Equiv C}
     (f: A → B) (g: B → C).
 
-  Global Instance id_semiring_morphism `{!SemiRing A}: SemiRing_Morphism id := {}.
+  Global Instance id_semiring_morphism `{!SemiRing A}: SemiRing_Morphism (@id A) := {}.
 
   Global Instance compose_semiring_morphisms `{!SemiRing_Morphism f} `{!SemiRing_Morphism g} : 
     SemiRing_Morphism (g ∘ f).
