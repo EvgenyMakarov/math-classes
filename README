@@ -1,6 +1,6 @@
 Compilation
 
-  Known to compile with commit 272d748f2145612ca23d of Matthieu Sozeau's subclasses branch. This can be obtained from: 
+  Known to compile with commit 7966044a960a3724a8e0 of Matthieu Sozeau's subclasses branch. This can be obtained from: 
     
     https://github.com/mattam82/Coq-misc/tree/subclasses
 
