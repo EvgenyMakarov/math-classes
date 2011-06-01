@@ -236,7 +236,6 @@ Proof.
   split; unfold pow, dy_pow.
     intros [xm xe] [ym ye] E1 e1 e2 E2. 
     unfold equiv, dy_equiv, DtoQ_slow in E1 |- *. simpl in *.
-    Existing Instance nonneg_semiring_elements.Proper_instance_2. (* FIXME *)
     rewrite E2. clear e1 E2.
     rewrite 2!(preserves_nat_pow (f:=ZtoStdQ)).
     rewrite 2!(commutativity ('e2 : Z)).
@@ -311,8 +310,8 @@ Lemma nonneg_mant (x : Dyadic) : 0 ≤ x ↔ 0 ≤ mant x.
 Proof.
   split; intros E.
    unfold le, dy_le, DtoQ_slow in E. simpl in *.
-   apply (order_preserving_back ZtoStdQ).
-   apply (order_preserving_back (.* 2 ^ expo x)).
+   apply (order_reflecting ZtoStdQ).
+   apply (order_reflecting (.* 2 ^ expo x)).
    now rewrite rings.preserves_0, left_absorb in E |- *.
   unfold le, dy_le, DtoQ_slow. simpl.
   apply (order_preserving ZtoStdQ) in E.

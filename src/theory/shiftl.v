@@ -147,7 +147,7 @@ Proof.
   intros n. rewrite !shiftl_S.
   split; intros E.
    now apply (strictly_order_preserving (2 *.)).
-  now apply (strictly_order_preserving_back (2 *.)).
+  now apply (strictly_order_reflecting (2 *.)).
 Qed.
 
 Global Instance: ∀ n, StrictOrderEmbedding (≪ n).
@@ -161,7 +161,7 @@ Global Instance: ∀ n, OrderEmbedding (≪ n).
 Proof. 
   split.
    now apply maps.full_pseudo_order_preserving.
-  now apply maps.full_pseudo_order_preserving_back.
+  now apply maps.full_pseudo_order_reflecting.
 Qed.
 
 Global Instance shiftl_strong_inj: ∀ n, StrongInjective (≪ n).
@@ -171,9 +171,9 @@ Lemma shiftl_le_flip_r `{GroupInv B} `{!Ring B} (x y : A) (n : B) :
   x ≤ y ≪ (-n)  ↔  x ≪ n ≤ y.
 Proof.
   split; intros E.
-   apply (order_preserving_back (≪ -n)).
+   apply (order_reflecting (≪ -n)).
    now rewrite shiftl_reverse by now apply rings.plus_opp_r.
-  apply (order_preserving_back (≪ n)).
+  apply (order_reflecting (≪ n)).
   now rewrite shiftl_reverse by now apply rings.plus_opp_l.
 Qed.
 

@@ -8,7 +8,7 @@ Section constant_functor.
   Notation F := (const b).
   Global Instance: Fmap F := λ _ _ _, cat_id.
 
-  Global Instance: ∀ a a' : A, Setoid_Morphism (fmap F : (a ⟶ a') → (F a ⟶ F a')).
+  Global Instance: ∀ a a', Setoid_Morphism (fmap F : (a ⟶ a') → (F a ⟶ F a')).
   Proof.
     intros; constructor; try apply _. 
     now intros ? ? ?.
@@ -27,7 +27,8 @@ Typeclasses Transparent const.
 Section constant_transformation.
   Context `{Category A} `{Category J}.
   Context {a a' : A}.
-
+(* fixme:
   Global Instance constant_transformation {f : a⟶a'} : NaturalTransformation (const f : J → _).
   Proof. intros ? ? ?. now rewrite left_identity, right_identity. Qed.
+*)
 End constant_transformation.
